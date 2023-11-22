@@ -50,11 +50,17 @@ class MeetingNotificationBot extends TeamsActivityHandler {
       else if (context.activity.value.Type == "SendTargetedMeetingNotification") {
         var adaptiveCardChoiceSet = context.activity.value.Choice;
         var selectedMembers = adaptiveCardChoiceSet.split(",");
+        console.log(`base url= ${this.baseUrl}`);
         this.targetedNotification(context, meetingId, selectedMembers);
       }
       else {
+        console.log("came to this part");
+        console.log(`context=${context}`);
+
         var json = JSON.stringify(context.activity.value);
         var out = JSON.parse(json);
+
+        
         
         if (out.action == 'inputselector') {
           contentBubbleTitles.contentQuestion = out.myReview;
@@ -79,7 +85,7 @@ class MeetingNotificationBot extends TeamsActivityHandler {
   // Custom method for sending targeted meeting notifications.
   async targetedNotification(context, meetingId, selectedMembers) {
     var serviceUrl = context.activity.serviceUrl;
-    const credentials = new MicrosoftAppCredentials(process.env.MicrosoftAppId, process.env.MicrosoftAppPassword);
+    const credentials = new MicrosoftAppCredentials(process.env.BOT_ID, process.env.BOT_PASSWORD);
     const botToken = await credentials.getToken();
 
     // Notification payload for meeting target notification API.
@@ -96,7 +102,8 @@ class MeetingNotificationBot extends TeamsActivityHandler {
                 height: "300",
                 width: "400",
                 title: "Targeted meeting Notification",
-                url: `${this.baseUrl}`
+                //url: `${this.baseUrl}`
+                url: "https://localhost:53000/index.html#/test"
               }
             }
           }

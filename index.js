@@ -24,8 +24,8 @@ require('dotenv').config({ path: ENV_FILE });
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
 const adapter = new BotFrameworkAdapter({
-    appId: process.env.MicrosoftAppId,
-    appPassword: process.env.MicrosoftAppPassword
+    appId: process.env.BOT_ID,
+    appPassword: process.env.BOT_PASSWORD
 });
 
 adapter.onTurnError = async (context, error) => {
@@ -55,9 +55,10 @@ const bot = new MeetingNotificationBot();
 var server = restify.createServer();
 server= require("express")();
 const port = process.env.port || process.env.PORT || 3978;
-server.listen(port, () => 
-    console.log(`\Bot/ME service listening at http://localhost:${port}`)
-);
+server.listen(port, () =>{ 
+    console.log(`\Bot/ME service listening at http://localhost:${port}`);
+    console.log(`bot creds check: id=${process.env.BOT_ID}, pw=${process.env.BOT_PASSWORD}`);
+});
 
  // Listen for incoming requests.
 server.post('/api/messages', (req, res) =>{

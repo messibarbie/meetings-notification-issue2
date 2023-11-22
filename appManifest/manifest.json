@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "scopes": [
         "personal",
         "team",
@@ -57,10 +57,11 @@
   ],
   "validDomains": [
     "<<domain-name>>",
-    "${{BOT_DOMAIN}}"
+    "${{BOT_DOMAIN}}",
+    "localhost:53000"
   ],
   "webApplicationInfo": {
-    "id": "${{AAD_APP_CLIENT_ID}}",
+    "id": "${{BOT_ID}}",
     "resource": "https://RscBasedStoreApp"
   },
   "authorization": {
